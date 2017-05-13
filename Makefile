@@ -1,4 +1,5 @@
 DESTDIR=/usr/local
+EINT_T_INC=/usr/local/include
 ARC=
 build: src/emu2d.o
 	ar rcs src/libemu2d.a src/emu2d.o
@@ -6,7 +7,7 @@ build: src/emu2d.o
 	cp src/emu2d.hpp inc/emu2d.hpp
 
 src/emu2d.o: src/emu2d.cpp
-	g++ -c -std=c++11 $(ARC) -o src/emu2d.o src/emu2d.cpp 
+	g++ -c -std=c++11 $(ARC) -I$(EINT_T_INC) -o src/emu2d.o src/emu2d.cpp
 clean:
 	rm -f lib/*.a
 	rm -f inc/*.hpp
