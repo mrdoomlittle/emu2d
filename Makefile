@@ -1,24 +1,24 @@
-DESTDIR=/usr/local
-EINT_T_INC=/usr/local/include
+INSTALL_DIR=/usr/local
+MDLINT_INC=/usr/local/include
 ARC=
 build: src/emu2d.o
-	ar rcs src/libemu2d.a src/emu2d.o
-	cp src/libemu2d.a lib/libemu2d.a
-	cp src/emu2d.hpp inc/emu2d.hpp
+	ar rcs libmdl-emu2d.a src/emu2d.o
+	cp libmdl-emu2d.a lib/libmdl-emu2d.a
+	cp src/emu2d.hpp inc/mdl
 
 src/emu2d.o: src/emu2d.cpp
-	g++ -c -std=c++11 $(ARC) -I$(EINT_T_INC) -o src/emu2d.o src/emu2d.cpp
+	g++ -c -std=c++11 -D__$(ARC) -I$(MDLINT_INC) -o src/emu2d.o src/emu2d.cpp
 clean:
 	rm -f lib/*.a
-	rm -f inc/*.hpp
+	rm -f inc/mdl/*.hpp
 	rm -f src/*.o
-	rm -f src/*.a
+	rm -f *.a
 install:
-	mkdir -p $(DESTDIR)/bin
-	mkdir -p $(DESTDIR)/lib
-	mkdir -p $(DESTDIR)/include
-	cp lib/libemu2d.a $(DESTDIR)/lib/libemu2d.a
-	cp inc/emu2d.hpp $(DESTDIR)/include/emu2d.hpp
+	mkdir -p $(INSTALL_DIR)/lib
+	mkdir -p $(INSTALL_DIR)/include
+	mkdir -p $(INSTALL_DIR)/include/mdl
+	cp lib/libemu2d.a $(INSTALL_DIR)/lib/libemu2d.a
+	cp inc/mdl/emu2d.hpp $(INSTALL_DIR)/include/mdl
 uninstall:
-	rm -f $(DESTDIR)/lib/libemu2d.a
-	rm -f $(DESTDIR)/include/emu2d.hpp
+	rm -f $(INSTALL_DIR)/lib/libmdl-emu2d.a
+	rm -rf $(INSTALL_DIR)/include/mdl
